@@ -1,0 +1,14 @@
+<div class="product-slider">
+  <div class="arrow-back" (click)="prevImg()" (mouseover) = "stop()">
+    <mat-icon >arrow_back_ios</mat-icon>
+  </div>
+  <img class="product-crousel-img" [src]="currentImg" (mouseover)="stop()" (mouseout)="start()">
+
+  <div class="arrow-fordward" (click)="nextImg()" (mouseover) = "stop()">
+    <mat-icon >arrow_forward_ios</mat-icon>
+  </div>
+
+  <div class="img-point-buttons">
+    <div *ngFor="let img of imgs" [ngClass]="img.imgUrl === currentImg ? 'active-point' :'img-point'" (click) ="setCurrentImg(img.index)"></div>
+  </div>
+</div>

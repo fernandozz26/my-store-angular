@@ -1,0 +1,75 @@
+
+  <form action="" class="login-form">
+
+    <div>
+
+      <div class="form-icon">
+        <mat-icon style="font-size: 6rem;" color="primary">account_circle</mat-icon>
+      </div>
+
+      <div class="form-card" *ngIf="loginOrSignin === true">
+        <mat-form-field appearance="outline" class="col-12">
+          <input matInput placeholder="Username" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-12">
+          <input type="password" matInput placeholder="password" required>
+        </mat-form-field>
+      </div>
+
+      <div class="form-card-signin" *ngIf="loginOrSignin === false">
+
+        <mat-form-field  class="col-12">
+          <input matInput placeholder="Name" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12" required>
+          <input matInput placeholder="Last name" >
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+          <input matInput placeholder="username" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+          <input type="email" matInput placeholder="email" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+          <input type="password" matInput placeholder="password" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+          <input type="password" matInput placeholder="re password" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+          <input type="date" matInput required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+          <mat-label>Authority</mat-label>
+          <mat-select>
+            <mat-option value="User">User</mat-option>
+            <mat-option value="Admin">Administrator</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <div class="form-action">
+        <div>
+          <mat-slide-toggle color="primary" (change)="loginHandle()" checked>
+            Sign in/Log in
+          </mat-slide-toggle>
+        </div>
+
+        <div>
+          <button mat-raised-button color="primary" type="submit" *ngIf="loginOrSignin === false">Guardar</button>
+          <button mat-raised-button color="primary" type="submit" *ngIf="loginOrSignin === true">Entrar</button>
+        </div>
+      </div>
+
+    </div>
+
+
+  </form>
