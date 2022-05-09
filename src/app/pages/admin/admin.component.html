@@ -1,1 +1,73 @@
-<p>admin works!</p>
+<div class="product-list">
+
+  <loader [hide]="loader"></loader>
+  <app-msg-ok [fail]="msgOk" [show]="msgOkShow"></app-msg-ok>
+  <h1>Productos</h1>
+
+  <div class="product-list-search-bar d-flex" (click)="showSearchBarItems(true)" (mouseleave)="showSearchBarItems(false)">
+    <div class="d-flex product-search-bar">
+      <input class="text-center border-0" type="text" [(ngModel)]="searchInput" (focus)="showSearchBarItems(true)" (ngModelChange)="searchProduct()">
+      <button class="btn btn-primary" (click)="searchProduct()"><mat-icon>search</mat-icon></button>
+      <div [ngClass]="searchbarItems ? 'product-search-bar-items' : 'disable'">
+        <div class="loader" [ngClass]="searchbarLoader ? 'loader' : 'disable'"></div>
+        <div class="search-bar-item" *ngFor="let product of searchProducts" (click)="setSearchProducts(product)" >{{product.productName}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive w-100 product-table">
+      <table class="table w-100 mt-4 table-borderless table-hover">
+        <thead>
+          <th>Id</th>
+          <th>Nombre Producto</th>
+          <th>Precio</th>
+          <th>Descuento</th>
+          <th>Stock</th>
+          <th>Imagenes</th>
+          <th>Desciption</th>
+          <th>Ajustes</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input class="form-control text-center" disabled style="background: rgb(247, 247, 247);color: gray;"></td>
+            <td><input class="form-control text-center" type="text" name="newProductName" [(ngModel)]="newProductName" ></td>
+            <td><input class="form-control text-center" type="number" name="newProductPrice" [(ngModel)]="newProductPrice" pattern="[^0-9]+"></td>
+            <td><input class="form-control text-center" type="number" name="newProductDiscount" [(ngModel)]="newProductDiscount" pattern="[0-9]+"></td>
+            <td><input class="form-control text-center" type="number" name="newProductStock" [(ngModel)]="newProductStock" pattern="[0-9]+"></td>
+            <td class="px-5">|</td>
+            <td class="px-5">|</td>
+            <td>
+              <button class="btn btn-primary" (click)="saveProduct()">Guardar</button>
+            </td>
+          </tr>
+          <tr *ngFor="let product of productTable$ | async" [ngClass]="product.stock <= 10 ? 'table-danger': ''">
+
+            <td><input class="form-control text-center"  [(ngModel)]="product.productId" disabled style="background: rgb(247, 247, 247);color: gray;" type="text" [value]="product.productId"></td>
+            <td><input class="form-control text-center" [(ngModel)]="product.productName"  type="text" [value]="product.productName"></td>
+            <td><input class="form-control text-center" [(ngModel)]="product.productPrice"  type="text" [value]="product.productPrice"></td>
+            <td><input class="form-control text-center" [(ngModel)]="product.discount"  type="text" [value]="product.discount"></td>
+            <td><input class="form-control text-center" [(ngModel)]="product.stock"  type="text" [value]="product.stock"></td>
+            <td><button class="btn btn-light" (click)="showPopupImage(product.imagesProduct,product.productId)">...</button></td>
+            <td><button class="btn btn-light" (click)="showPopupDescription(product.description)">...</button></td>
+            <td class="d-flex">
+              <button class="m-1 btn btn-success" (click)="editProduct(product)">Editar</button>
+              <button class="m-1 btn btn-danger" (click)="deleteProduct(product.productId)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+
+</div>
+
+<div>
+
+<app-popup [show]="popupProductShow" [rows]="textAreaRows" [value]="popupProductValue" [title]="'Imagenes de producto'"
+(okcallback)="savePopupImage()" (hideCallback)="hidePopupImage()" (valueEdited)="setValueFromPopupImage($event)"></app-popup>
+
+<app-popup [show]="popupDescriptionProductShow" [rows]="1" [value]="popupDescriptionProductValue" [title]="'Descripcion Html Producto'"
+ (hideCallback)="hidePopupDescription()"></app-popup>
+</div>
+
+
+

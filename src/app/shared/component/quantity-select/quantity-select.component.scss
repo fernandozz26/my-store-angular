@@ -1,0 +1,49 @@
+.disable{
+  display: none;
+}
+
+.form-control{
+  min-width: 10rem;
+  height: 2.5rem;
+  position: relative;
+}
+
+.form-select-label{
+  text-align: center;
+  width: 100%;
+  padding: 0.2rem .2rem .2rem .2rem;
+}
+
+.form-select-container{
+  position: absolute;
+  width: 100%;
+  height: 10rem;
+  border: solid 1px rgb(218, 218, 218);
+  top: 2.6rem;
+  left: 0;
+  background: white;
+  overflow-y: auto;
+}
+
+.form-select-option, .form-select-option-custom{
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 0.3rem;
+
+}
+
+
+.form-select-option:hover{
+  color: white;
+  background: rgb(0, 119, 255);
+}
+
+.form-select-option-custom >input{
+  width: 100%;
+  border-radius: 5px;
+  border: solid 1px rgb(216, 216, 216);
+  padding: 0.2rem 0 .2rem 0rem;
+  text-align: center;
+  margin-bottom: 10px;
+}

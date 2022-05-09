@@ -1,3 +1,6 @@
-<div>
+<div class="home-page">
+  <loader [hide]="loader"></loader>
   <app-slider></app-slider>
+  <app-carousel [data] = "carouselProducts"></app-carousel>
+  <app-gridcard [data] = "carouselProducts"></app-gridcard>
 </div>

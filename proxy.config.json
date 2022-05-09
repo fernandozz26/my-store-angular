@@ -1,0 +1,12 @@
+{
+  "/productService/*": {
+    "target": "http://localhost:8082/",
+    "security":false,
+    "logLevel": "debug"
+  },
+  "/userService/*": {
+    "target": "http://localhost:8081/",
+    "security":false,
+    "logLevel": "debug"
+  }
+}

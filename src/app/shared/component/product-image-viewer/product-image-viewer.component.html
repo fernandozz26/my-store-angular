@@ -1,0 +1,17 @@
+<div class="product-image-viewer">
+  <div (click)="prevImg()" class="img-button-change row-left-icon">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </div>
+  <div (click)="nextImg()" class="img-button-change row-right-icon">
+    <mat-icon >arrow_forward_ios</mat-icon>
+  </div>
+  <img class="product-image-viewer-img" [src]="currentImg" alt="" srcset="">
+
+  <div class="product-image-change-buttons">
+    <div  *ngFor="let image of images"
+
+    [ngClass]="image.productImgUrl === currentImg ?
+    ' product-image-change-button-button image-selected-button' :
+    (image.productImgUrl === '' ? 'disable' : 'product-image-change-button-button')" ></div>
+  </div>
+</div>

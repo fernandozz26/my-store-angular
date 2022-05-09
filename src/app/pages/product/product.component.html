@@ -1,0 +1,153 @@
+<div class="product-page">
+    <div class="product-view">
+
+      <div class="product-view-img">
+        <app-product-image-viewer [images]="images" [success]="success"></app-product-image-viewer>
+      </div>
+
+      <div class="product-view-price mt-4">
+
+        <div class="rating-seller mb-4" style="margin: 0 auto;">MÁS VENDIDO</div>
+
+        <div class="d-flex w-100 justify-content-center">
+          <h1 class="w-50">{{product.productName !== undefined ? product.productName : ''}}</h1>
+          <div class="card-rating w-50">
+            <div class="w-25">
+              <div class="rating-rating">
+                <mat-icon>star</mat-icon>
+                <mat-icon>star</mat-icon>
+                <mat-icon>star</mat-icon>
+                <mat-icon>star_half</mat-icon>
+                <mat-icon>star_border</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="product-price-price">
+          <span style="font-size: 1.2rem; text-decoration: line-through; margin-right: 10px;">125</span>
+          <span style="font-size: 2.2rem; margin-right: 1rem;">$110</span>
+          <span style="color: rgb(0, 214, 0); font-size: 1.2rem;">10 OFF</span>
+
+        </div>
+
+        <div class="flash-offer">
+          <div class="d-flex">
+            <mat-icon>flash_on</mat-icon>
+            <p style="font-size: 1.1rem; margin: 0px 0 0 1rem;">Oferta relampago</p>
+          </div>
+
+          <div class="d-flex" style="font-weight: 400;">
+            <p class="flash-text">  {{timeLabel}}</p>
+          </div>
+          <div>
+
+          </div>
+        </div>
+
+        <div class="add-to-cart-actions">
+          <div style="width: 80%; margin: 0 auto">
+            <button class="btn btn-primary btn-lg w-100 mb-3">Comprar ahora</button>
+            <button class="btn btn-dark btn-lg w-100"><mat-icon style="align-items: center;">add_shopping_cart</mat-icon> Agregar al carrito</button>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+          <div class="card-add-favorite" (click)="addToFavorite()">
+            <mat-icon>{{isFavorite ? 'favorite' : 'favorite_border'}}</mat-icon>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="product-desciption">
+      <div class="product-desciption-description" [innerHTML]="(product.description ? product.description : html) | Html">
+
+      </div>
+      <div class="product-opinions mt-4">
+
+        <h2 class="ms-4 mt-3 font-wight-1">Preguntas</h2>
+
+        <div class="product-opinions-questions">
+          <input class="form-control" type="text" placeholder="Escribir una pregunta">
+          <button class="btn btn-primary">Enviar Pregunta</button>
+        </div>
+
+        <div class="comments">
+          <p>De cauntos Litros es y esta refriguerada o esta almacenada? entrega domicilio?</p>
+        </div>
+
+        <div class="comments">
+          <p>Si hago un pedido de algunas 400 unidades no tendria un descuento de mayoreo?</p>
+        </div>
+
+        <div class="more-comments">
+          <p style="padding: 0; margin:0;">Ver mas</p>
+          <mat-icon style="padding: 0; margin:0;">keyboard_arrow_down</mat-icon>
+        </div>
+
+        <h2 class="ms-4 font-wight-1">Comentarios</h2>
+
+        <div class="card-rating">
+          <div class="w-50" style="text-align: center;">
+            <div class="rating-rating">
+              <mat-icon>star</mat-icon>
+              <mat-icon>star</mat-icon>
+              <mat-icon>star</mat-icon>
+              <mat-icon>star_half</mat-icon>
+              <mat-icon>star_border</mat-icon>
+            </div>
+
+            <div class="mt-2">
+              <p>500 Valoraciones</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="comments">
+          <h5>J Luis Lopez</h5>
+          <p>La cawam es una verdadera barbaridad muy deliciosa y recomendada creo que volvere a comprar una diaria, 100 malta</p>
+        </div>
+
+        <div class="comments">
+          <div class="w-100 d-flex">
+            <h5 class="w-75">Juana de Aro</h5>
+            <div class="rating-rating w-25">
+              <mat-icon style="font-size: 1rem;">star</mat-icon>
+              <mat-icon style="font-size: 1rem;">star</mat-icon>
+              <mat-icon style="font-size: 1rem;">star</mat-icon>
+              <mat-icon style="font-size: 1rem;">star</mat-icon>
+              <mat-icon style="font-size: 1rem;">star_half</mat-icon>
+            </div>
+          </div>
+          <p>Soy un cawamero de corazon y espera un poco mas del producto</p>
+        </div>
+
+        <div class="comments">
+          <h5>Juana de Aro</h5>
+          <p>Es la primera vez que pruebo el producto y la verdad que me ha encantado es uno de mis favoritos</p>
+        </div>
+
+        <div class="comments">
+          <h5>Rupertino el Maistro</h5>
+          <p>Es lo que tiene que ser esta genial</p>
+        </div>
+
+        <div class="more-comments">
+          <p style="padding: 0; margin:0;">Ver mas</p>
+          <mat-icon style="padding: 0; margin:0;">keyboard_arrow_down</mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <h2>Recomendados</h2>
+    <div class="related-products">
+
+      <div class="w-100 d-flex">
+        <app-carousel [data] = "carouselProducts" [seller] = "false"></app-carousel>
+      </div>
+    </div>
+</div>

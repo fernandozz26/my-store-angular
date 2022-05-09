@@ -1,0 +1,32 @@
+<mat-card class="card">
+    <div class="card-title">
+      <p style="font-size: 0.8rem; font-weight: 400;">{{product.productName}}</p>
+    </div>
+
+    <img class="card-img" src={{product.imagesProduct[0].productImgUrl}} alt="">
+    <mat-card-content class="d-grid gap-2">
+      <div class="card-price">
+        <div class="price-price">
+          <p>{{ '$ ' + product.productPrice}}</p>
+          <p class="price-discount">{{product.discount > 0 ? product.discount+' % OFF': ''}}</p>
+        </div>
+
+        <div [ngClass]="seller ? 'card-rating' :'hide'" >
+            <div class="rating-seller">MÁS VENDIDO</div>
+            <div class="rating-rating">
+              <mat-icon>star</mat-icon>
+              <mat-icon>star</mat-icon>
+              <mat-icon>star</mat-icon>
+              <mat-icon>star_half</mat-icon>
+              <mat-icon>star_border</mat-icon>
+            </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-around" style="align-items: center;">
+        <button style="margin:10px;"type="button" class="btn btn-primary" (click)="viewProduct(product.productId)">Ver producto</button>
+        <div class="card-add-favorite" (click)="addToFavorite()">
+          <mat-icon>{{isFavorite ? 'favorite' : 'favorite_border'}}</mat-icon>
+        </div>
+      </div>
+    </mat-card-content>
+</mat-card>

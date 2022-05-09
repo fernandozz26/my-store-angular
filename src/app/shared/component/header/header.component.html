@@ -1,3 +1,72 @@
-<mat-toolbar>
-  <span color="primary">Menu</span>
+<mat-toolbar class="header">
+  <span color="primary">My store</span>
+  <div [ngClass]="showMenu ? 'header-right-buttons' : 'disable'">
+    <div class="header-pages-links"  >
+
+      <div class="page-icon" *ngIf="isAdmin" (click)="hideMenuEvent()" routerLink="/dashboard">
+        <mat-icon>assessment</mat-icon>
+        <p>Dashboard</p>
+      </div>
+
+      <div class="page-icon" (click)="hideMenuEvent()" *ngIf="isAdmin">
+        <mat-icon>update</mat-icon>
+        <p>Mantenimiento</p>
+      </div>
+
+      <div class="page-icon" *ngIf="isAdmin" (click)="hideMenuEvent()" routerLink="/admin">
+        <mat-icon>chrome_reader_mode</mat-icon>
+        <p>Listas</p>
+      </div>
+
+      <h6 class="header-separators" *ngIf="isAdmin">|</h6>
+
+      <div class="page-icon" (click)="hideMenuEvent()" routerLink="/">
+        <mat-icon>home</mat-icon>
+        <p>Inicio</p>
+      </div>
+      <div class="page-icon" (click)="hideMenuEvent()" routerLink="/favorites">
+        <mat-icon style="color: rgb(247, 96, 96);">favorite</mat-icon>
+        <p>Favoritos</p>
+      </div>
+      <div class="page-icon" (click)="hideMenuEvent()">
+        <mat-icon>shopping_cart</mat-icon>
+        <p>Carrito</p>
+      </div>
+
+      <div class="page-icon" (click)="hideMenuEvent()">
+        <mat-icon style="color: rgb(253, 195, 4);">notifications</mat-icon>
+        <p>Notificaciones</p>
+      </div>
+
+
+    </div>
+
+    <div class="account-buttons" *ngIf="isLoged">
+
+      <h6 class="header-separators">|</h6>
+      <div class="page-icon">
+        <mat-icon style="color: rgb(0, 153, 255);" >account_circle</mat-icon>
+        <p>{{username}}</p>
+      </div>
+
+      <div class="page-icon" (click)="logout()">
+        <mat-icon>exit_to_app </mat-icon>
+        <p>Cerrar Sesión</p>
+      </div>
+
+    </div>
+
+    <div class="account-buttons" *ngIf="!isLoged">
+
+      <div class="page-icon" routerLink="/login">
+        <mat-icon>account_box</mat-icon>
+        <p>Inisiar Sesión</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="show-options-menu" (click)="showMenuEvent()">
+    <mat-icon style="font-size: 1.8rem;">menu</mat-icon>
+  </div>
+
 </mat-toolbar>

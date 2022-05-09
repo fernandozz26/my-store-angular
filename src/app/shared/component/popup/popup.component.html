@@ -1,0 +1,10 @@
+<div [ngClass]="show ? 'popup popup-active' : 'popup-disable'">
+  <div class="popup-title">
+    <h1>{{title}}</h1>
+  </div>
+  <textarea class="text-area" rows="{{rows}}" [value]="value" [(ngModel)]="value"></textarea>
+  <div class="d-flex justify-content-center p-2">
+    <button class="btn btn-primary m-2" (click)="okPopup()">Guardar</button>
+    <button class="btn btn-dark m-2" (click)="hidePopup()">Cerrar</button>
+  </div>
+</div>

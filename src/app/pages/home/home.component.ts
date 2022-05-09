@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/shared/dto/product.class';
+import { ProductService } from '../../shared/services/product.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  carouselProducts!: Product[];
+
+  loader:boolean = true;
+
+  constructor(private productService: ProductService) {
+    this.loader = false;
+      this.productService.getSellerProducts().subscribe((data: Product[]) => {
+          this.carouselProducts = data;
+      });
+      this.loader = true;
+   }
 
   ngOnInit(): void {
+
   }
+
+
 
 }

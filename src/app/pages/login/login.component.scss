@@ -35,6 +35,26 @@
   width: 80%;
 }
 
+.form-error-msg{
+  width: 60%;
+  height: auto;
+  padding: 5px;
+  background: rgb(255, 232, 232);
+  border: solid 1px rgb(255, 181, 181);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  color: rgb(223, 0, 0);
+  margin-bottom: 1.5rem;
+}
+
+
+.form-error-msg> p{
+  margin-top: 10px;
+}
+
 .form-action{
   display: block;
   text-align: center;

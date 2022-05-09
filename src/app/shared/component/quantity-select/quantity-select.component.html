@@ -1,0 +1,13 @@
+<div [ngClass]="show ? 'form-control border border-primary border-3' : 'form-control'">
+  <label  for="" class="form-select-label" (click)="showSelect()">{{value === 0 ? 'Cantidad' : value}}</label>
+  <div [ngClass]="show ? 'form-select-container' : 'disable'">
+    <div class="form-select-option" (click)="setNormalValue(1)">1</div>
+    <div class="form-select-option" (click)="setNormalValue(2)">2</div>
+    <div class="form-select-option" (click)="setNormalValue(3)">3</div>
+    <div class="form-select-option" (click)="setNormalValue(4)">4</div>
+    <div class="form-select-option" (click)="setNormalValue(5)">5</div>
+    <div class="form-select-option-custom">
+      <input type="number" placeholder="+5" (change)="setNormalValueCustom($event)" (keydown)="onEnter($event)">
+    </div>
+  </div>
+</div>

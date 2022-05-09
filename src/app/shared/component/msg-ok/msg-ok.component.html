@@ -1,0 +1,8 @@
+<div id="msgOKK" [ngClass]="fail ? (show ? 'msg-fail' : 'disable') :(show ? 'msg-ok' : 'disable')">
+  <div class="msg-icon">
+    <mat-icon style="font-size: 2rem; padding: 0; margin: 0;">{{fail ? 'cancel' : 'check'}}</mat-icon>
+    <h3 style="padding: 0; margin: 0;">{{fail ? 'Error' : 'OK'}}</h3>
+  </div>
+</div>
+
+

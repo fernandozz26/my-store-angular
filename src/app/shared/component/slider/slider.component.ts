@@ -9,11 +9,11 @@ export class SliderComponent implements OnInit {
 
 
   imgs: ImageType[] = [
-    {index: 0, imgName: "Home", imgUrl: "https://m.media-amazon.com/images/I/61TvGBhz14L._SX3000_.jpg"},
-    {index: 1, imgName: "Home", imgUrl: "https://m.media-amazon.com/images/I/71+CpSjz+LL._SX3000_.jpg"},
-    {index: 2, imgName: "Home", imgUrl: "https://m.media-amazon.com/images/I/61qM42MG71L._SX3000_.jpg"},
-    {index: 3, imgName: "Home", imgUrl: "https://media.istockphoto.com/photos/digital-eye-wave-lines-stock-background-stock-video-picture-id1226241649?b=1&k=20&m=1226241649&s=170667a&w=0&h=lXhD5bdn_YT50-ItctUnqB2WiGZ8Jye1GZHjvDsb2Xo="},
-    {index: 4, imgName: "Home", imgUrl: "https://wallpaperaccess.com/full/84248.png"}
+    {index: 0, imgName: "Home", imgUrl: "https://images8.alphacoders.com/413/thumb-1920-413078.jpg"},
+    {index: 1, imgName: "Home", imgUrl: "https://wallpapercave.com/wp/y0AncG6.jpg"},
+    {index: 2, imgName: "Home", imgUrl: "https://www.wallpaperup.com/uploads/wallpapers/2019/04/22/1320284/3095b8c1e2c040253fda3973695d0ca9-700.jpg"},
+    {index: 3, imgName: "Home", imgUrl: "https://www.wallpaperup.com/uploads/wallpapers/2019/12/04/1358222/3dd8b27fd3ba82b3b9d5de0b2f756717.jpg"},
+    {index: 4, imgName: "Home", imgUrl: "https://p4.wallpaperbetter.com/wallpaper/971/510/380/draft-beer-wallpaper-preview.jpg"}
   ];
 
   currentImg: string = "";
