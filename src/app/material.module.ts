@@ -11,9 +11,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatCheckboxModule} from '@angular/material/checkbox'
 
 const materialModules = [MatToolbarModule, MatSidenavModule, MatCardModule,MatFormFieldModule, MatButtonModule,
-  MatInputModule, MatDatepickerModule, MatSlideToggleModule,MatIconModule,MatSelectModule, MatTableModule,MatPaginatorModule];
+  MatInputModule, MatDatepickerModule, MatSlideToggleModule,MatIconModule,MatSelectModule, MatTableModule,MatPaginatorModule, MatCheckboxModule];
+
 @NgModule({
   imports : [...materialModules],
   exports :[...materialModules],

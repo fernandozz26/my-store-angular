@@ -1,0 +1,22 @@
+
+<div class="cart-page">
+  <loader [hide]="loader"></loader>
+
+  <div class="empty-cart" *ngIf="cartProducts.length === 0">
+    <div class="empty-cart-content">
+      <mat-icon style="font-size: 15rem; width: 15rem; height: 15rem;">remove_shopping_cart</mat-icon>
+      <h1>Carrito vacío</h1>
+    </div>
+  </div>
+
+  <div class="cart-products" *ngIf="cartProducts.length > 0">
+    <app-linear-product *ngFor="let product of cartProducts" [product]="product.product"
+    [showTotal]="true" (updateProduct)="updateProductCart(product.productCartId, quantity)" (deleteProduct)="deleteProduct(product.productCartId)"
+    (quantityEmmiter)="setQuantity($event)" [showAddToCart]="false" [quantity]="product.quantity"></app-linear-product>
+  </div>
+
+  <div class="cart-total mt-3" *ngIf="cartProducts.length > 0">
+    <h1 class="mx-0">{{getTotal()}}</h1>
+    <button class="btn btn-primary" (click)="payCart(cartProducts[0])">Pagar</button>
+  </div>
+</div>

@@ -27,6 +27,11 @@ import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { PopupComponent } from './shared/component/popup/popup.component';
 import { MsgOkComponent } from './shared/component/msg-ok/msg-ok.component';
 import { QuantitySelectComponent } from './shared/component/quantity-select/quantity-select.component';
+import { CartModule } from './pages/cart/cart.module';
+import { CartComponent } from './pages/cart/cart.component';
+import { LinearProductComponent } from './shared/component/linear-product/linear-product.component';
+import { CheckoutModule } from './pages/checkout/checkout.module';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -47,14 +52,17 @@ import { QuantitySelectComponent } from './shared/component/quantity-select/quan
     FavoritesComponent,
     PopupComponent,
     MsgOkComponent,
-    QuantitySelectComponent
+    QuantitySelectComponent,
+    CartComponent,
+    LinearProductComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule, FormsModule
+    HttpClientModule, FormsModule, CartModule, CheckoutModule
   ],
   providers: [intercetorProvider],
   bootstrap: [AppComponent]

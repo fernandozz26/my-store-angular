@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LocalStorageConstants } from '../constants/localstorage.constants';
 import { SessionConstants } from '../constants/session-contants';
-import { FavoriteProduct } from '../dto/FavoriteProduct.class';
+import { Favorite, FavoriteProduct } from '../dto/FavoriteProduct.class';
 import { Product } from '../dto/product.class';
 
 @Injectable({
@@ -18,6 +18,7 @@ export class ProductService{
 
   productUrl = "http://localhost:8082/product/";
 
+  // HOST Products
   public getSellerProducts() : Observable<any>{
     return this.http.get(this.productUrl);
   }
@@ -34,18 +35,81 @@ export class ProductService{
     return this.http.post(this.productUrl+'favorite', product);
   }
 
+  public saveCartProduct(product:any): Observable<any>{
+    return this.http.post(this.productUrl+"cart/", product);
+  }
 
+  public deleteFavoriteProduct(favoriteId: number) : Observable<any>{
+    return this.http.delete(this.productUrl+"favorite/"+favoriteId);
+  }
 
+  public getCartProducts(username: string): Observable<any>{
+    return this.http.get(this.productUrl+"cart/"+username)
+  }
 
+  public getCartProduct(cartId: number, productId: number): Observable<any>{
+    return this.http.get(this.productUrl+"cart/"+cartId + "/"+ productId)
+  }
 
+  public updateProductCart(quantity: number, productCartId:number) :Observable<any>{
+    return this.http.patch(this.productUrl+"cart", {productCartId: productCartId, quantity:quantity});
+  }
 
+  public deleteProductCart(productCartId: number):Observable<any>{
+    return this.http.delete(this.productUrl+"cart/" + productCartId);
+  }
 
-
-
-
-
-
+  public payCart(cardId: number):Observable<any>{
+    return this.http.post(this.productUrl+"pay/cart", {"cardId": cardId});
+  }
   // local
+
+  localFavoriteFilter(hostFavorites:Favorite[], localFavorites: Product[]): Product[]{
+    let index: number[] = [];
+
+    for(var i = 0; i < hostFavorites.length; i++){
+      for(var j = 0; j < localFavorites.length; j++){
+        if(hostFavorites[i].product.productId === localFavorites[j].productId){
+          index.push(localFavorites[j].productId);
+        }
+      }
+    }
+    index.forEach((id :number) => {
+      localFavorites.forEach((product:Product) => {
+        if(product.productId === id){
+          localFavorites = this.removeLocalFavorite(product);
+
+        }
+      });
+    })
+    return localFavorites;
+
+  }
+
+  getLocalFavorites(hostFavorites:Favorite[]) : Product[]{
+    let favoriteProducts: Product[] = [];
+    let savedData = String(localStorage.getItem(LocalStorageConstants.LOCAL_FAVORITE));
+
+    let currentfavoriteProducts: Product[] = JSON.parse(savedData);
+
+    favoriteProducts = this.localFavoriteFilter(hostFavorites, currentfavoriteProducts);
+
+    localStorage.setItem(LocalStorageConstants.LOCAL_FAVORITE, JSON.stringify(favoriteProducts));
+
+    return favoriteProducts;
+  }
+
+  removeLocalFavorite(product:Product): Product[]{
+    let products:Product[] = [];
+    let savedData = String(localStorage.getItem(LocalStorageConstants.LOCAL_FAVORITE));
+    let currentProducts: Product[] = JSON.parse(savedData);
+    currentProducts.forEach((productt: Product) =>{
+      if(product.productId !== productt.productId){
+        products.push(productt);
+      }
+    });
+    return products;
+  }
 
   addToFavorite(product: Product): void{
 

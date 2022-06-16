@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-msg-ok',

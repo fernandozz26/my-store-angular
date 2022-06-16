@@ -1,28 +1,13 @@
 
-<app-msg-ok [fail]="true"></app-msg-ok>
+
 <div class="favorite-page">
   <div class="favorite-products">
 
-    <div class="favorite-product-items" *ngFor="let favorite of favoritesProducts">
-      <img [src]="favorite.product.imagesProduct[0].productImgUrl ? favorite.product.imagesProduct[0].productImgUrl : ''" alt="">
-      <div class="d-block">
-        <h4>{{favorite.product.productName}}</h4>
-      </div>
-      <div class="favorite-pricing" style="width: 10rem;">
-        <h3 [class]="favorite.product.discount > 0 ? 'text-muted' : 'disable'">{{'$ ' + favorite.product.productPrice}}</h3>
-        <h2>{{'$ ' + (favorite.product.productPrice -(favorite.product.productPrice * favorite.product.discount) /100)}}</h2>
-        <h3 [class]="favorite.product.discount > 0 ? '' : 'disable'" style="color: rgb(1, 196, 1);">{{favorite.product.discount + '% OFF'}}</h3>
-      </div>
+    <app-linear-product *ngFor="let favorite of favoritesProducts"
+    [product]="favorite.product" (deleteProduct)="deleteFavorite(favorite.favoriteId)"></app-linear-product>
 
-      <div>
-        <quantity-select></quantity-select>
-      </div>
-
-      <div class="favorite-product-button d-grid gap-2">
-        <button class="btn btn-primary" >Comprar ahora</button>
-        <button class="btn btn-dark" >Agregar al carrito</button>
-      </div>
-    </div>
-
+    <app-linear-product *ngFor="let product of localFavoriteProducts" [product]="product"></app-linear-product>
   </div>
 </div>
+
+<app-msg-ok [fail]="true"></app-msg-ok>

@@ -1,0 +1,108 @@
+<div class="checkout-page">
+  <div class="checkout-content">
+    <div class="w-40 mt-2">
+      <h2>Tarjeta credito o debito</h2>
+      <div class="credit-card">
+        <div class="credit-card-header"></div>
+        <div class="credit-card-content">
+          <span>Propietario</span>
+          <input class="glass-input" type="text" placeholder="Juan Ramon" maxlength="48" minlength="8" id="cardName" [(ngModel)]="cardName">
+
+          <span>Número tarjeta</span>
+          <input class="glass-input" type="text" (keydown)="cardKeyDown($event)" placeholder="0000-0000-0000-0000" maxlength="19" minlength="14" id="cardNumber" [(ngModel)]="cardNumber">
+
+          <div class="d-flex w-100">
+            <div class="card-expiration">
+              <span>Expiración</span>
+              <div class="d-flex w-100 ex">
+                <input class="glass-input w-40 text-center" type="text" (keydown)="cardKeyDown($event)" placeholder="MM" minlength="1" maxlength="2" id="cardExpirationMonth" [(ngModel)]="cardExpirationMonth">
+                <span>/</span>
+                <input class="glass-input w-40 text-center" type="text" (keydown)="cardKeyDown($event)" placeholder="AAAA" minlength="4" maxlength="4" id="cardExpirationYear" [(ngModel)]="cardExpirationYear">
+              </div>
+            </div>
+
+            <div class="card-ccv">
+              <span>CVV</span>
+              <input class="glass-input w-75 text-center" type="text" (keydown)="cardKeyDown($event)" placeholder="000" minlength="3" maxlength="4" id="cardCVV" [(ngModel)]="cardCVV">
+            </div>
+          </div>
+
+          <div class="form-check w-100 d-flex justify-content-center cart-save">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label ms-3" style="color: rgba(255, 255, 255, 0.6)" for="flexCheckDefault">
+              Guardar tarjeta
+            </label>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="w-100 d-flex justify-content-center intems align-items-center mt-3" *ngIf="validCart">
+
+        <div class="ok-button">
+          <mat-icon>check</mat-icon>
+        </div>
+        <h3 class="mt-3 ms-3">Tarjeta Valida</h3>
+      </div>
+
+      <h2 class="mt-5">Dirreción de envio</h2>
+
+      <div class="barbershop-pole">
+
+      </div>
+      <div class="w-100 mx-auto text-aling-center">
+          <input class="address-input w-100" type="text" placeholder="¿Quién resive?" maxlength="48" [(ngModel)]="addressName"  id="addressName">
+          <input class="address-input w-100" type="text" placeholder="Calle" maxlength="48" [(ngModel)]="addressStreet"  id="addressStreet">
+          <div class="d-flex justify-content-between">
+            <input class="address-input w-45" type="text" (keydown)="onEnter($event)" placeholder="Numero exterior" maxlength="5" [(ngModel)]="addressOutDoorNumber"  id="addressOutDoorNumber">
+            <input class="address-input w-45" type="text" (keydown)="onEnter($event)" placeholder="Numero interior" maxlength="5" [(ngModel)]="addressInteriorNumber"  id="addressInteriorNumber">
+          </div>
+          <div class="d-flex justify-content-between">
+            <input class="address-input w-45" type="text" (keydown)="onEnter($event)" placeholder="Codigo postal" maxlength="6" [(ngModel)]="postalCode"  id="postalCode">
+            <input class="address-input w-45" type="text" placeholder="Ciudad" maxlength="24" [(ngModel)]="city"  id="city">
+          </div>
+          <input class="address-input w-45 me-5" type="text" placeholder="Estado" maxlength="24" [(ngModel)]="countryState"  id="countryState">
+          <textarea name="" class="address-input w-100 h-4" id="" cols="30" rows="10" placeholder="Referencia: descripción que ayude a localizar el domicilio como casa color morado, serca de oxxo, porton cafe oscuro, etc..."></textarea>
+      </div>
+
+      <div class="form-check w-100 d-flex justify-content-center mt-4 mb-3">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+        <label class="form-check-label ms-3" for="flexCheckDefault2">
+          Guardar Direccion
+        </label>
+      </div>
+
+      <div class="w-100 d-flex justify-content-center intems align-items-center mb-5" *ngIf="validAddress">
+        <div class="ok-button">
+          <mat-icon>check</mat-icon>
+        </div>
+        <h3 class="mt-3 ms-3">Direccion Valida</h3>
+      </div>
+
+      <div class="barbershop-pole down"></div>
+
+    </div>
+
+    <div class="d-block w-40 text-center mx-auto text-secondary mt-5">
+      <h3>TOTAL</h3>
+      <div class="w-100 text-center">
+
+        <table class=" product-row w-100" *ngFor="let productCart of cartProducts">
+          <tr class="w-100">
+            <td class="w-50"><h4>{{productCart.product.productName}}</h4></td>
+            <td class="w-17"><h4>{{productCart.product.productPrice -(productCart.product.productPrice * (productCart.product.discount / 100))}}</h4></td>
+            <td class="w-17"> <h4>{{" x " + productCart.quantity}}</h4></td>
+            <td class="w-17"><h4>{{ "$ " + (productCart.quantity * productCart.product.productPrice -(productCart.product.productPrice * (productCart.product.discount / 100)))}}</h4></td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="mt-3">
+        <h2>{{"$ " + getTotal()}}</h2>
+        <button class="btn btn-primary">Pagar ahora</button>
+      </div>
+    </div>
+  </div>
+</div>

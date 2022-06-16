@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnInit, Output, ViewChild } from '@angular/co
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { Product } from 'src/app/shared/dto/product.class';
 import { ImageProduct } from 'src/app/shared/interfaces/Product.interface';
 import { ProductAdminService } from './service/product-admin.service';
@@ -65,7 +65,17 @@ export class AdminComponent implements OnInit{
     productAdminService.rowsTextArea.subscribe( (rows: number) => {
       this.textAreaRows = rows;
     })
-    this.productAdminService.getAllProducts().subscribe((products : Product[]) => {
+    this.productAdminService.getAllProducts().pipe(
+      tap(() => {}, err => {
+        if(err instanceof HttpErrorResponse){
+          if(err.status !== 401){
+              this.loader = true;;
+              return;
+          }
+          this.router.navigate(['login']);
+        }
+      })
+    ).subscribe((products : Product[]) => {
 
       this.productTable = products;
       this.productAdminService.productTable.next(this.productTable);
@@ -122,7 +132,17 @@ export class AdminComponent implements OnInit{
   searchProduct():void{
     this.searchbarLoader = true;
     if(this.searchInput !== ''){
-      this.productAdminService.searchProducts(this.searchInput).subscribe((res:Product[]) => {
+      this.productAdminService.searchProducts(this.searchInput).pipe(
+        tap(() => {}, err => {
+          if(err instanceof HttpErrorResponse){
+            if(err.status !== 401){
+                this.loader = true;;
+                return;
+            }
+            this.router.navigate(['login']);
+          }
+        })
+      ).subscribe((res:Product[]) => {
         this.searchProducts = res;
       });
     }else{

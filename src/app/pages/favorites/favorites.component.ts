@@ -12,6 +12,8 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class FavoritesComponent implements OnInit {
 
   favoritesProducts: Favorite[] = [];
+  localFavoriteProducts: Product[] = [];
+  loader:boolean = true;
 
   constructor(private productService: ProductService) {
     let username = sessionStorage.getItem(SessionConstants.USER_NAME_KEY);
@@ -24,6 +26,31 @@ export class FavoritesComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    let intervalId = setInterval ( () => {
+      if(this.favoritesProducts !== []){
+        this.localFavoriteProducts = this.productService.getLocalFavorites(this.favoritesProducts);
+        clearInterval(intervalId);
+      }
+
+    }, 1000)
   }
+
+  deleteFavorite(favoriteId: number):void{
+    this.loader = false;
+    let newFavorites: Favorite[] = [];
+
+    this.productService.deleteFavoriteProduct(favoriteId).subscribe(res => {
+      console.log(res);
+      this.favoritesProducts.forEach( (favorite:Favorite) => {
+        if(favorite.favoriteId !== favoriteId){
+          newFavorites.push(favorite);
+        }
+      })
+      this.favoritesProducts = newFavorites;
+    });
+
+
+  }
+
 
 }

@@ -1,0 +1,30 @@
+<div class="liner-product">
+  <div class="delete-liner-product" (click)="deleteProductClick()">
+    <mat-icon style="font-size: 1.5rem;">cancel</mat-icon>
+  </div>
+  <loader [hide]="loader"></loader>
+  <app-msg-ok [show]="showMsg" [fail]="showMsgFail"></app-msg-ok>
+  <img [src]="product.imagesProduct[0].productImgUrl ? product.imagesProduct[0].productImgUrl : ''" alt="">
+
+  <div class="liner-product-pricing" style="width: 10rem;">
+    <h4>{{product.productName}}</h4>
+    <div class="d-flex justify-content-around">
+      <h3 [class]="product.discount > 0 ? 'text-muted' : 'disable'">{{'$ ' + product.productPrice}}</h3>
+      <h2>{{'$ ' + (product.productPrice -(product.productPrice * product.discount) /100)}}</h2>
+      <h3 [class]="product.discount > 0 ? '' : 'disable'" style="color: rgb(1, 196, 1);">{{product.discount + '% OFF'}}</h3>
+    </div>
+  </div>
+
+  <div class="quantity-select">
+    <quantity-select (val)="setQuantity($event)" [value]="quantity"></quantity-select>
+  </div>
+
+  <div class="total-price" *ngIf="showTotal">
+    <h1>{{'$ ' + totalFilter((product.productPrice -(product.productPrice * product.discount) /100) * quantity) }} </h1>
+  </div>
+
+  <div class="favorite-product-button d-grid gap-2">
+    <button class="btn btn-primary" (click)="buyNow()" >Comprar ahora</button>
+    <button *ngIf="showAddToCart" class="btn btn-dark" (click)="addToCart()" >Agregar al carrito</button>
+  </div>
+</div>
