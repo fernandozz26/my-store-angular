@@ -1,12 +1,12 @@
 .checkout-page{
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 5rem
 }
 
 .checkout-content{
-  display: flex;
+  display: block;
   margin: 0 auto;
-  width: 100%;
+  width: 60%;
   min-height: 30rem;
   background: white;
   border-radius: 10px;
@@ -83,7 +83,10 @@ span{
 }
 
 .w-40{
-  width: 40%;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
 .address-input{
@@ -97,7 +100,7 @@ span{
 }
 
 .cart-save{
- margin-top: 1.6rem;
+  margin-top: -0.5rem;
 }
 
 .h-4{
@@ -141,22 +144,7 @@ span{
 
 
 @media (max-width: 900px){
-  .checkout-page{
-    margin-top: 5rem;
-  }
-
   .checkout-content{
-    display: block;
-  }
-
-  .w-40{
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  .cart-save{
-    margin-top: -0.5rem;
+    width: 100%;
   }
 }

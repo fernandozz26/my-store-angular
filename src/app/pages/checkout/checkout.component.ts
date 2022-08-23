@@ -15,6 +15,10 @@ export class CheckoutComponent implements OnInit {
   validCart: boolean = false;
   validAddress: boolean = false;
 
+  //pay methods
+  payMethod: number = 0;
+  validPayMethod: boolean = false;
+
   // card
     cardName!: string;
     cardNumber!: number;
@@ -49,6 +53,39 @@ export class CheckoutComponent implements OnInit {
    }
 
 
+   setPayMethod(type: number):void{
+     this.payMethod = type;
+
+     switch(type){
+        case 1:
+          
+          var paypalCheck  = document.getElementById("paypalCheck") as HTMLInputElement | null;
+          var  mercadoCheck = document.getElementById("mercadoCheck") as HTMLInputElement  |  null;
+          if(paypalCheck && mercadoCheck){
+            paypalCheck.checked = false;
+            mercadoCheck.checked = false;
+          }
+            break;
+        case 2:
+          var  mercadoCheck = document.getElementById("mercadoCheck") as HTMLInputElement  |  null;
+          var cardCreditCheck = document.getElementById("cardCreditCheck") as HTMLInputElement | null;
+          if(mercadoCheck && cardCreditCheck){
+            mercadoCheck.checked = false;
+            cardCreditCheck.checked = false;
+          }
+          break;
+          case 3:
+            
+            var paypalCheck  = document.getElementById("paypalCheck") as HTMLInputElement | null;
+            var cardCreditCheck = document.getElementById("cardCreditCheck") as HTMLInputElement | null;
+            if(paypalCheck && cardCreditCheck){
+              paypalCheck.checked = false;
+              cardCreditCheck.checked = false;
+            }
+            break;
+     }
+   }
+
    cardValidation(): void{
     let currentTime = new Date();
     // returns the month (from 0 to 11)
@@ -62,11 +99,14 @@ export class CheckoutComponent implements OnInit {
 
      if(this.cardExpirationYear === currentYear &&  this.cardExpirationMonth > currentMonth){
        this.validCart = true;
+       this.validPayMethod = true;
      }else if(this.cardExpirationYear >= currentYear){
        this.validCart = true;
+       this.validPayMethod = true;
      }
    }else{
      this.validCart = false;
+     this.validPayMethod = false;
    }
    }
 

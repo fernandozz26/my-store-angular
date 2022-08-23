@@ -1,8 +1,15 @@
 <div class="checkout-page">
   <div class="checkout-content">
     <div class="w-40 mt-2">
-      <h2>Tarjeta credito o debito</h2>
-      <div class="credit-card">
+      <h2>Pago</h2>
+
+      <div class="d-block">
+        <div class="form-check w-50 text-start mt-3 mb-3" >
+          <input class="form-check-input" value="1" type="radio" name="cardCreditCheck" (change)="setPayMethod(1)" id="cardCreditCheck">
+          <label class="form-check-label" for="cardCreditCheck">Tarjeta de crédito/débito</label>
+        </div>
+      </div>
+      <div class="credit-card" *ngIf="payMethod == 1">
         <div class="credit-card-header"></div>
         <div class="credit-card-content">
           <span>Propietario</span>
@@ -23,7 +30,8 @@
 
             <div class="card-ccv">
               <span>CVV</span>
-              <input class="glass-input w-75 text-center" type="text" (keydown)="cardKeyDown($event)" placeholder="000" minlength="3" maxlength="4" id="cardCVV" [(ngModel)]="cardCVV">
+              <input class="glass-input w-75 text-center" type="text" (keydown)="cardKeyDown($event)" placeholder="000" minlength="3" maxlength="4" 
+              id="cardCVV" [(ngModel)]="cardCVV" (change)="cardValidation()">
             </div>
           </div>
 
@@ -39,19 +47,32 @@
       </div>
 
       <div class="w-100 d-flex justify-content-center intems align-items-center mt-3" *ngIf="validCart">
-
         <div class="ok-button">
           <mat-icon>check</mat-icon>
         </div>
         <h3 class="mt-3 ms-3">Tarjeta Valida</h3>
       </div>
 
+      <div class="d-block">
+        <div class="form-check text-start mt-3 mb-3" style="width:10%" >
+          <input class="form-check-input" value="2" type="radio" name="paypalCheck" (change)="setPayMethod(2)" id="paypalCheck">
+          <label class="form-check-label" for="paypalCheck">PayPal</label>
+        </div>
+      </div>
+
+      <div class="d-block">
+        <div class="form-check text-start mt-3 mb-3" style="width:20%" >
+          <input class="form-check-input" value="3" type="radio" name="mercadoCheck" (change)="setPayMethod(3)" id="mercadoCheck">
+          <label class="form-check-label" for="mercadoCheck">Mercado Pago</label>
+        </div>
+      </div>
+
       <h2 class="mt-5">Dirreción de envio</h2>
 
-      <div class="barbershop-pole">
+      <div class="barbershop-pole" *ngIf="validPayMethod">
 
       </div>
-      <div class="w-100 mx-auto text-aling-center">
+      <div class="w-100 mx-auto text-aling-center" *ngIf="validPayMethod">
           <input class="address-input w-100" type="text" placeholder="¿Quién resive?" maxlength="48" [(ngModel)]="addressName"  id="addressName">
           <input class="address-input w-100" type="text" placeholder="Calle" maxlength="48" [(ngModel)]="addressStreet"  id="addressStreet">
           <div class="d-flex justify-content-between">
@@ -66,7 +87,7 @@
           <textarea name="" class="address-input w-100 h-4" id="" cols="30" rows="10" placeholder="Referencia: descripción que ayude a localizar el domicilio como casa color morado, serca de oxxo, porton cafe oscuro, etc..."></textarea>
       </div>
 
-      <div class="form-check w-100 d-flex justify-content-center mt-4 mb-3">
+      <div class="form-check w-100 d-flex justify-content-center mt-4 mb-3" *ngIf="validPayMethod">
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
         <label class="form-check-label ms-3" for="flexCheckDefault2">
           Guardar Direccion
@@ -80,7 +101,7 @@
         <h3 class="mt-3 ms-3">Direccion Valida</h3>
       </div>
 
-      <div class="barbershop-pole down"></div>
+      <div class="barbershop-pole down" *ngIf="validPayMethod"></div>
 
     </div>
 
@@ -99,7 +120,7 @@
 
       </div>
 
-      <div class="mt-3">
+      <div class="mt-3 pb-5">
         <h2>{{"$ " + getTotal()}}</h2>
         <button class="btn btn-primary">Pagar ahora</button>
       </div>
